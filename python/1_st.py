@@ -1,2 +1,1 @@
-print('''hello world 
-      en peru deepak pundamava''')
+print("hello world ")
