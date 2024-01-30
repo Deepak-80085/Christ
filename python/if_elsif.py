@@ -1,4 +1,4 @@
-n = int(input("Enter a number :" ))
+n = int(input("Enter a number : " ))
 if (n<10):
     print("It is a single digit number")
 elif (n<100):
