@@ -20,7 +20,8 @@ void menu(){
 	scanf("%d",&choice);
 }
 
-void createstack(){
+void createqueue()
+{
 	top = NULL;
 }
 
@@ -33,21 +34,34 @@ void push(int elm){
 
 int pop(){
 	
-	int obj = newnode->data;
-	newnode->data = NULL;
-	top= newnode->next;
+	if(top == NULL)
+	{
+		printf("Error : Underflow");
+		return NULL;
+	}
+	else
+	{
+	int obj = top->data;
+	struct node * temp = top->next;
+	free(top);
+	top = temp;
 	return obj;
+	}
 }
 
 void display(){
 	struct node * ptr;
 	ptr = top;
-	printf("\n\t{ ");
+	printf("\n\t [ ");
 	while (ptr!= NULL){
 		printf("%d ", ptr->data);
 		ptr = ptr->next;
 	}
-	printf("}\n\n");
+	printf("n\n");
+}
+void createstack()
+{
+	top = NULL;
 }
 
 int main(){
@@ -61,6 +75,7 @@ int main(){
 				push(element);
 				break;
 			case 2:
+				pop();
 				break;
 			case 3:
 				display();

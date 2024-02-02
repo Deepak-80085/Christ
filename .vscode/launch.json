@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/christ/c-program",
-      "program": "d:/christ/c-program/build/Debug/outDebug",
+      "cwd": "d:/christ/Data_structures_&_algorithms",
+      "program": "d:/christ/Data_structures_&_algorithms/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
@@ -21,8 +21,4 @@
       ]
     }
   ]
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> e42ebcea7dbed2b4de5bf060c30d9d51d9d02f5f
