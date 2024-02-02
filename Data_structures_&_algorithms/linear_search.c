@@ -4,7 +4,7 @@ int main(void)
 	int a[100];
 	int low,high,found,n,i,keyvalue,index;
 	
-	printf("`````````````````Number of elements: ");
+	printf("Number of elements: ");
 	scanf("%d",&n);
 	
 	for(i=0;i<n;i++)
