@@ -21,7 +21,7 @@ int main()
     }
 	printf(" |");
 	printf("\n------------------------------\n");
-   printf("\n\tElement to be added: ");
+  	printf("\n\tElement to be added: ");
 	scanf("%d",&element);
 	printf("\n\tPosition: ");
 	scanf("%d",&pos);
@@ -48,7 +48,9 @@ int main()
     printf("\n\tEnter the value whose index to be found:");
 	scanf("%d",&keyvalue);
 	low=0; high=n-1;
+
 	t=linearsearch(a,low,high,keyvalue);
+	
 	if(t==-1)
 	{
 		printf("\n-------Element not found.---------");
