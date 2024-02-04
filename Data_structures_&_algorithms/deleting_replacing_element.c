@@ -5,7 +5,7 @@ void del(int a[50],int n ,int high,int pos);
 int main()
 {
 	int a[50],n,i,element,pos,low,high;
-		printf("DELETING AN ELEMENT IN ARRAY AND REPLACING IT..");
+		printf("\n\tDELETING AN ELEMENT IN ARRAY AND REPLACING IT..");
 		printf("\n------------------------------\n");
 		printf("Enter the number the of elements for the array : ");
 		scanf("%d",&n);
