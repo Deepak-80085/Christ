@@ -1,22 +1,25 @@
 #include<stdio.h>
 #include<stdlib.h>
+
 struct node{
-int data;
-struct node *next;
+	int data;
+	struct node *next;
 };
 struct node *newnode, *front,*rear;
-createstack(){
-front=NULL;
-rear=NULL;
+createstack()
+{
+	front=NULL;
+	rear=NULL;
 }
-int menu(){
-int c;
-printf("\n 1-Enqueue.");
-printf("\n 2-Dequeue.");
-printf("\n 3-Display.");
-printf("\n 4-Exit.");
-printf("\nEnter your choice: ");
-label:
+int menu()
+{
+	int c;
+	printf("\n 1-Enqueue.");
+	printf("\n 2-Dequeue.");
+	printf("\n 3-Display.");
+	printf("\n 4-Exit.");
+	printf("\nEnter your choice: ");
+	label:
 scanf("%d",&c);
 if(c<1 || c>4){
 printf("Please enter correct choice.\n");

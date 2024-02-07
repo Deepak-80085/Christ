@@ -1,33 +1,44 @@
 #include <stdio.h>
 #define MAX 5
 
-int choice,element,t;
+int choice,element,i;
 
 struct stack
 {
 	int a[MAX];
 	int top;
 }S;
-void menu(),push(int elem),display();
-int pop();
+void menu(),push(int elem),pop(),display();
+
 
 int main(){
 	S.top=-1;
+		printf("\n---------------------------------STACK--------------------------\n");
 	do {
 		menu();
 		switch(choice){
 			case 1:
-				printf("Enter element: ");
+				
+				if (S.top == MAX-1)
+					printf("\n\t-----Error: Overflow---------\n");
+				else
+				{
+				printf("\tEnter element: ");
 				scanf("%d",&element);
 				push(element);
-				break;
-			case 2:
-				if (t=pop()){
-				printf("The popped element is %d\n", t);
-				break;
 				}
+				break;
+				
+			case 2:
+				
+				if (S.top==-1)
+					printf("\n\t-------------Error: Underflow-------------\n");
 				else
-					break;
+				{
+					pop();				
+				}
+				break;
+				
 			case 3:
 				display();
 				break;
@@ -38,37 +49,40 @@ int main(){
 	return 0;
 }
 
-void menu(){
+void menu()
+{
+	printf("\n-----------------------------------------------\n");
 	printf("\n 1.Push");
 	printf("\n 2.Pop");
 	printf("\n 3.Display");
 	printf("\n 4.Exit");
+	printf("\n-----------------------------------------------\n");
 	printf("\n\nEnter Choice: ");
 	scanf("%d",&choice);
 }
-void push(int elem){
-	if (S.top == MAX)
-		printf("Error: Overflow\n");
-	else{
+void push(int elem)
+		{
+
 		S.top = S.top+1;
-		S.a[S.top] = elem;
-	}
-}
-int pop(){
-	if (S.top==-1)
-		printf("Error: Underflow\n");
-	else
+		S.a[S.top] = elem;	
+		}	
+void pop()	
 		{
 		int obj=S.a[S.top];
 		S.top--;
-		return obj;
+		printf("The popped element is [ %d ]\n", obj); 
 		}
-}
+
 void display(){
-	int i;
-	printf("\n\t{");
-	for (i=0;i<S.top;i++)
-		printf("%d, ", S.a[i]);
-	printf("%d}\n\n", S.a[S.top]);
+	
+	if(S.top == -1)
+	
+		printf("\n---------------The stack is emtpy--------------\n");
+	else
+	{
+	for (i=S.top;i>=0;i--)
+		printf("| %d ", S.a[i]);
+	printf("|\n\n");
+	}
 }
 
