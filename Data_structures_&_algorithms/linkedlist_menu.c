@@ -162,6 +162,7 @@ int main()
 					printf("Enter the element to delete: ");
   					scanf("%d",&e);
   					del(e);
+  					top = NULL;
   					break;
 				}
 			case 3:
