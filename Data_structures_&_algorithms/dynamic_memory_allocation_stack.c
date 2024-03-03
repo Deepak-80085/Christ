@@ -20,32 +20,26 @@ void menu(){
 	scanf("%d",&choice);
 }
 
-void createqueue()
-{
-	top = NULL;
-}
 
-void push(int elm){
+void push(int elm)
+{
 	newnode = (struct node *) malloc(sizeof(struct node));
 	newnode -> data = elm;
 	newnode->next = top;
 	top = newnode;
 }
 
-int pop(){
+void pop(){
 	
 	if(top == NULL)
 	{
-		printf("Error : Underflow");
-		return NULL;
+		printf("\n\t-----Error: UNDERFLOW---------\n");
 	}
 	else
 	{
-	int obj = top->data;
 	struct node * temp = top->next;
 	free(top);
 	top = temp;
-	return obj;
 	}
 }
 
@@ -64,8 +58,10 @@ void createstack()
 	top = NULL;
 }
 
-int main(){
-	
+int main()
+	{
+		createstack();
+	printf("\n---------------------------------DYNAMIC MEMEORY ALLOCATION STACK--------------------------\n");
 	do {
 		menu();
 		switch(choice){

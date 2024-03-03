@@ -81,7 +81,7 @@ void display()
     {
         printf("\n-------------Queue is empty.-----------\n\n");
         return;
-    }
+    }		
     else
     {
     	

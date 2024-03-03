@@ -141,7 +141,7 @@ void menu()
 }
 
 
-						int linear(int a[],int low,int high,int keyvalue)
+int linear(int a[],int low,int high,int keyvalue)
 {
 	
 		int found=0;
@@ -160,7 +160,7 @@ void menu()
 	}
 }
 
-						int binary(int a[],int low,int high,int keyvalue)
+int binary(int a[],int low,int high,int keyvalue)
 {
 	
 			int found = 0;

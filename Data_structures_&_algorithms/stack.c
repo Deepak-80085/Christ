@@ -43,7 +43,9 @@ int main(){
 				display();
 				break;
 			case 4:
-				break;		
+				break;
+			default:
+				printf("Enter the correct choice...\n\n");		
 		}
 	}while(choice!=4);
 	return 0;
@@ -57,13 +59,16 @@ void menu()
 	printf("\n 3.Display");
 	printf("\n 4.Exit");
 	printf("\n-----------------------------------------------\n");
+	do
+	{
+		fflush(stdin);
 	printf("\n\nEnter Choice: ");
-	scanf("%d",&choice);
+	}while(scanf("%d",&choice)!= 1 || choice<1 || choice>4);
 }
 void push(int elem)
 		{
 
-		S.top = S.top+1;
+		S.top ++;
 		S.a[S.top] = elem;	
 		}	
 void pop()	

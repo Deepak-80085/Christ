@@ -29,7 +29,7 @@ int main(void)
 		}
   	else
    		{
-   			insert_element(a,n-1,pos,element,n);
+   			insert_element(a,n-1,pos,element,n);   
 		} 		
 }
 
