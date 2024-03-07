@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/christ/C_programming_pratice_problems",
-      "program": "d:/christ/C_programming_pratice_problems/build/Debug/outDebug",
+      "cwd": "d:/christ/Data_structures_&_algorithms/Exam_questions",
+      "program": "d:/christ/Data_structures_&_algorithms/Exam_questions/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
