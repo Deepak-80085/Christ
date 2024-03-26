@@ -50,7 +50,7 @@ int main()
 int arr[] = {1000, 11, 445, 1, 330, 3000}; 
 int arr_size = 6; 
 struct pair minmax = getMinMax (arr, arr_size); 
-printf("nMinimum element is %d", minmax.min); 
-printf("nMaximum element is %d", minmax.max); 
+printf("\nMinimum element is %d", minmax.min); 
+printf("\nMaximum element is %d", minmax.max); 
 getchar(); 
 } 

@@ -17,7 +17,7 @@ int main()
 			break; 
 		} 
 
-		++max; 
+		++max;	 
 	} 
 
 	return 0; 

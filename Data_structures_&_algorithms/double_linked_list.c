@@ -2,7 +2,7 @@
 #include<stdlib.h>
 
 struct node
-{
+{	
      int data;
      struct node * next;
      struct node * back;
@@ -18,7 +18,7 @@ void insert(int e)
 
     if(head == NULL && tail == NULL)
     {
-        head = newnode;
+        head = newnode;	
         tail = newnode;
     }
     else if(e < head->data)

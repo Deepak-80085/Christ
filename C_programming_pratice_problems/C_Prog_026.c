@@ -16,7 +16,7 @@ int largest(int arr[], int n)
 	// element with current max 
 	for (i = 1; i < n; i++) 
 		if (arr[i] > max) 
-			max = arr[i]; 
+			max = arr[i]; 			
 
 	return max; 
 } 

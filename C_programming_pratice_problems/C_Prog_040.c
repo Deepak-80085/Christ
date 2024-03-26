@@ -1,5 +1,6 @@
 // C Implementation for drawing circle 
-#include <graphics.h> 
+#inlcude<stdio.h>	
+#include<graphics.h> 
 
 //driver code 
 int main() 

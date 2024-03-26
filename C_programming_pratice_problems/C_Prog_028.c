@@ -12,7 +12,7 @@ double average(int a[], int n)
 	for ( i = 0; i < n; i++)
 		sum += a[i];
 
-	return (double)sum / n;
+	return (long)sum / n;
 }
 
 // Driver code
