@@ -1,16 +1,16 @@
 #include <stdio.h>
-#include <conio.h>
 #include <stdlib.h>
 
-int i, a[100], n, t;
+int i,j, a[100], n, t;
 
 int min(int a[], int i, int n) {
     int min_value = i;
-    for (int j = i + 1; j < n; j++) {
-        if (a[j] < a[min_value]) {
+    for ( j = i + 1; j < n; j++) {
+        if (a[j] < a[min_value])
+         {
             min_value = j;
         }
-    }
+    }   
     return min_value;
 }
 int swap(int t,int a[100])
