@@ -1,7 +1,7 @@
 #include <stdio.h>
 int i,key,j,arr[100],n;
-void insertionSort(int arr[], int n) {
-    int i, key, j;
+void insertion_sort(int arr[], int n) {
+//    int i, key, j;
     for (i = 1; i < n; i++) {
         key = arr[i];
         j = i - 1;
@@ -13,20 +13,22 @@ void insertionSort(int arr[], int n) {
     }
 }
 
-int main() {
+int main() 
+{
+	printf("\n------------------------------------------------------\n");
     printf("Enter the element in array: ");
     scanf("%d",&n);
     for(i=0;i<n;i++)
     {
-        printf("Enter the elements: ");
+        printf("Enter the element a[%d]: ",i);
         scanf("%d",&arr[i]);
     }
-    insertionSort(arr, n);
-
+    insertion_sort(arr, n);
+	printf("\n------------------------------------------------------\n");
     printf("Sorted array: \n");
-    for (int i = 0; i < n; i++)
-        printf("%d ", arr[i]);
+    for ( i = 0; i < n; i++)
+        printf(" | %d ", arr[i]);
     printf("\n");
-
+	printf("\n------------------------------------------------------\n");
     return 0;
 }

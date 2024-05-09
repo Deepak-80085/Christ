@@ -5,7 +5,7 @@ struct node{
 	int data;
 	struct node *next;
 };
-struct node *newnode, *front,*rear;
+struct node *newnode, *front,*rear,*ptr;
 createqueue()
 {
 	front=NULL;
@@ -55,8 +55,10 @@ void dequeue()
 	}
 	else
 	{
+		ptr = front->next;
 		printf("The element removed is %d.\n",front->data);
-		front=front->next;
+		free(front);
+		front=ptr;
 	}
 }
 void display()
@@ -66,8 +68,7 @@ void display()
 	}
 	else
 	{
-		struct node *ptr;
-		ptr=front;
+	ptr=front;
 	while(ptr!=NULL)
 	{
 	printf(" | %d",ptr->data);

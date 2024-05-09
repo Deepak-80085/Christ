@@ -26,12 +26,14 @@ void insert(int e)
         newnode->next = head;
         head->back = newnode;
         head = newnode;
+        head->back = tail->next;
     }
     else if(e >  tail->data)
     {
         tail->next = newnode;
         newnode->back = tail;
         tail = newnode;
+        head->back = tail->next;
     }
     else
     {
@@ -69,14 +71,14 @@ void del(int e)
     {
         temp = head;
         head = head->next;
-        head->back = temp->back; 
+        head->back = tail->next; 
         printf("Element deleted is %d success",e);
     }
     else if(tail->data == e)
     {
         temp = tail;
         tail = tail->back;
-        tail->next = temp->next;
+        tail->next = head->back;
         printf("Element deleted is %d successfully",e);
     }
     else
@@ -105,11 +107,12 @@ void display()
     else
     {
     temp = head;
-    while(temp!=NULL)
+    while(temp->next!=head->back)
     {
         printf(" | %d",temp->data);
         temp = temp->next;
     }
+    printf(" | %d |",tail->data);
     }
 }
 
@@ -121,11 +124,12 @@ void rev()
     else
     {
     temp = tail;
-    while(temp!=NULL)
+    while(temp->back!=tail->next)
     {
         printf(" | %d",temp->data);
         temp = temp->back;
     }
+    printf(" | %d |",head->data);
     }
 }
 
