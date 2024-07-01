@@ -14,11 +14,28 @@ void quicksort(int a[],int low,int high){
 			l++;
 			h--;
 		}
+		for(i=0;i<n;i++)
+		{
+			printf(" %d ",a[i]);
+		}
+		printf("\n");
 	}while(h>=l);
 	if(low<h)
 		quicksort(a,low,h);
+		printf("%d , %d\n",low,h);
+				for(i=0;i<n;i++)
+		{
+			printf(" %d ",a[i]);
+		}
+		printf("\n");
 	if(l<high)
 		quicksort(a,l,high);
+		printf("%d , %d\n",l,high);
+				for(i=0;i<n;i++)
+		{
+			printf(" %d ",a[i]);
+		}
+		printf("\n");
 }
 int main()
 {

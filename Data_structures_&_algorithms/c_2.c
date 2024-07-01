@@ -11,6 +11,6 @@ int main(void)
 	t= t+days;
 	}
 	printf("%d is days",days);
-	printf("\n%d is the total diastance",p);
+	printf("\n%d is the total distance",p);
 }
 
