@@ -16,10 +16,9 @@ def looping_through_string(df):
     for char in crime_head:
         print(char)
 
-def length_and_copies(df):
+def length(df):
     crime_head = df.iloc[0]['Crime Head (Col. 2)']
     print("Length of the first crime name:", len(crime_head))
-    print("Separator:", "=" * 40)
 
 def check_string(df):
     all_crimes = " ".join(df['Crime Head (Col. 2)'])
@@ -35,7 +34,7 @@ def formatting_strings(df):
     crime = df.iloc[0]['Crime Head (Col. 2)']
     cases = df.iloc[0]['Cases Reported against Juveniles - (Col. 3)']
     print("Old-style formatting: %s has %d reported cases." % (crime, cases))
-    print("format() method: {crime} has {cases} reported cases.".format(crime=crime, cases=cases))
+    print("format() methqod: {crime} has {cases} reported cases.".format(crime=crime, cases=cases))
     print(f"f-string: {crime} has {cases} reported cases.")
 
 def join_strings(df):
@@ -60,14 +59,14 @@ def main(file_path):
     looping_through_string(df)
     print("----------------------------------------")
     print("\nString Length and Multiple Copies:")
-    length_and_copies(df)
+    length(df)
     print(" -----------------------------------------")
     print("\nCheck String:")
     check_string(df)
     print("----------------------------------------")
     print("\nConcatenate Strings:")
     concatenate_strings(df)
-    print("----------------------------------------")
+    print("----------------------------------------")  
     print("\nFormatting Strings:")
     formatting_strings(df)
     print("----------------------------------------")
