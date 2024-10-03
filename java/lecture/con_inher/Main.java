@@ -17,6 +17,10 @@ public class Main {
 
     public static void main(String[] args) {
         Student student = new Student();
-        // student.super();
+        System.out.println(student);
+        Person person = new Person();
+        System.out.println(person);
     }
 }
+
+

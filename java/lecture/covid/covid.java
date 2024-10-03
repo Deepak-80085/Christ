@@ -18,9 +18,6 @@ public class covid {
         System.out.print("Enter your ADDRESS [only your area name] : ");
         String address = scanner.nextLine();
 
-        // Storing candidate date of birth
-        System.out.print("Enter your DATE OF BIRTH : ");
-        String dob = scanner.nextLine();
 
         do {
             if (age >= 18 && age < 90) {

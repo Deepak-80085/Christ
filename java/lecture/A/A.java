@@ -4,6 +4,8 @@
 // 1 Read the input value,store them in an appropriate var with specific DT
 // 2 Display the stores value of all var in a proper display format
 
+import mypack.A;
+
 public class A {
     static int m = 100; // static variable
     int n = 90; // instance variable

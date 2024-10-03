@@ -18,8 +18,6 @@ print("-------------------------------------------------------------------------
 print("\nLast 10 records of my Data set is:")
 print(mydata.tail(10))
 print("----------------------------------------------------------------------------")
-print("Shape of the Data:")
-
 print("\nShape of my Data set is:")
 print(mydata.shape)
 print("----------------------------------------------------------------------------")
@@ -57,5 +55,5 @@ def remove_outliers(mydata, column):
 print("----------------------------------------------------------------------------")
 
 mydata1 = remove_outliers(mydata, 'Total - Total - (Col. 15)')
-print("\nShape after removing outliers:") 
+print("\nShape after removing outliers:")
 print(mydata1.shape)

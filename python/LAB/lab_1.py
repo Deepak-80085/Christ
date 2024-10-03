@@ -17,7 +17,7 @@ print("Set:", categories)
 print()
 
 print("2. List Operations:")
-crimes.append("Kidnapping and Abduction")
+crimes.append("Kidnapping and Abduction") 
 print("After append:", crimes)
 
 crimes.remove("Burglary")
@@ -35,7 +35,7 @@ print("Concatenated tuple:", all_ages)
 
 sliced = all_ages[1:3]
 print("Sliced tuple:", sliced)
-print()
+print("------------------------------------------------------------------------------------------------------------------")
 
 print("4. Set Operations:")
 violent = {"Murder", "Rape", "Assault on Women", "Kidnapping and Abduction"}

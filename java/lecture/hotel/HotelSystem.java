@@ -1,9 +1,7 @@
-
 import java.util.Scanner;
 
 // Base class (Level 0)
 class Restaurant {
-
     protected String name;
     protected String address;
 
@@ -18,9 +16,8 @@ class Restaurant {
     }
 }
 
-// Level 1 class
+// Level 1 class for Discount5
 class Discount5 extends Restaurant {
-
     public Discount5(String name, String address) {
         super(name, address);
     }
@@ -30,8 +27,8 @@ class Discount5 extends Restaurant {
     }
 }
 
+// Level 1 class for Discount15
 class Discount15 extends Restaurant {
-
     public Discount15(String name, String address) {
         super(name, address);
     }
@@ -41,12 +38,10 @@ class Discount15 extends Restaurant {
     }
 }
 
-// Level 2 class
+// Level 2 class for SouthIndian
 class SouthIndian extends Discount5 {
-
     private static final double IDLY_PRICE = 15.0;
     private static final double DOSA_PRICE = 40.0;
-
 
     public SouthIndian(String name, String address) {
         super(name, address);
@@ -59,16 +54,13 @@ class SouthIndian extends Discount5 {
     public double orderDosa(int plates) {
         return plates * DOSA_PRICE;
     }
-
-
 }
 
-class meals extends Discount15 {
-
-
+// Level 2 class for Meals
+class Meals extends Discount15 {
     private static final double MEALS_PRICE = 100.0;
 
-    public meals(String name, String address) {
+    public Meals(String name, String address) {
         super(name, address);
     }
 
@@ -83,9 +75,10 @@ public class HotelSystem {
         Scanner scanner = new Scanner(System.in);
 
         SouthIndian southIndian = new SouthIndian("Spice Garden", "123 Main St, City");
+        Meals meals = new Meals("Spice Garden", "123 Main St, City"); // Create Meals object
 
         System.out.println("Menu:");
-        System.out.println("1. Idly (Rs. 30 per plate)");
+        System.out.println("1. Idly (Rs. 15 per plate)"); // Corrected price
         System.out.println("2. Dosa (Rs. 40 per plate)");
         System.out.println("3. Meals (Rs. 100 per plate)");
         System.out.print("Enter your choice (1-3): ");
@@ -110,7 +103,7 @@ public class HotelSystem {
                 itemName = "Dosa";
                 break;
             case 3:
-                totalBefore = southIndian.orderMeals(plates);
+                totalBefore = meals.orderMeals(plates); // Use Meals object for meals order
                 discountPercentage = 15.0;
                 itemName = "Meals";
                 break;
@@ -120,11 +113,19 @@ public class HotelSystem {
                 return;
         }
 
-        double totalAfter = southIndian.applyDiscount(totalBefore, discountPercentage);
-        double totalAfter = southIndian.applyDiscount(totalBefore, discountPercentage);
+        double totalAfter = 0;
+        if (choice == 3) {
+            totalAfter = meals.applyDiscount(totalBefore, discountPercentage); // Apply discount for meals
+        } else {
+            totalAfter = southIndian.applyDiscount(totalBefore, discountPercentage); // Apply discount for other items
+        }
+
         System.out.println("\n----- Bill -----");
-        southIndian.displayInfo();
-        meals.displayInfo();
+        if (choice == 3) {
+            meals.displayInfo(); // Display info for meals
+        } else {
+            southIndian.displayInfo(); // Display info for other items
+        }
         System.out.printf("%s: %d plates\n", itemName, plates);
         System.out.printf("Total before discount: Rs. %.2f\n", totalBefore);
         System.out.printf("Discount applied: %.2f%%\n", discountPercentage);

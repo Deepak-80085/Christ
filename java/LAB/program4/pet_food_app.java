@@ -31,20 +31,18 @@ class pet_food {
         return false;
     }
 
-    boolean update_quantity() {
-        return update_quantity(-1);
-    }
+
 
     String get_info() {
         return name + " for " + animal_type + " - $" + price + " (" + quantity + " in stock)";
     }
 
-    String get_info(boolean detailed) {
-        if (detailed) {
-            return "Product: " + name + "\nAnimal Type: " + animal_type + "\nPrice: $" + price + "\nQuantity: " + quantity;
-        }
-        return get_info();
-    }
+    // String get_info(boolean detailed) {
+    //     if (detailed) {
+    //         return "Product: " + name + "\nAnimal Type: " + animal_type + "\nPrice: $" + price + "\nQuantity: " + quantity;
+    //     }
+    //     return get_info();
+    // }
 
     void set_price(double new_price) {
         price = new_price;
@@ -69,11 +67,11 @@ class purchase {
     int quantity;
     double price;
 
-    purchase() {
-        item_name = "unknown item";
-        quantity = 0;
-        price = 0.0;
-    }
+    // purchase() {
+    //     item_name = "unknown item";
+    //     quantity = 0;
+    //     price = 0.0;
+    // }
 
     purchase(String item_name, int quantity, double price) {
         this.item_name = item_name;
@@ -184,7 +182,7 @@ class pet_food_store {
             process_order(input, quantity);
         }
     }
-
+  
     void update_price() {
         display_inventory();
         System.out.print("enter the product index to update: ");

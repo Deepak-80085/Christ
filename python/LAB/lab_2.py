@@ -1,7 +1,7 @@
 import pandas as pd
 
-def read_csv_file(file_path):
-    return pd.read_csv(file_path)
+# # def read_csv_file(file_path):
+#     return pd.read_csv(file_path)
 
 def array_and_slicing_operations(df):
     crime_head = df.iloc[0]['Crime Head (Col. 2)']
@@ -47,8 +47,8 @@ def f_strings_usage(df):
         total_cases = row['Total - Total - (Col. 15)']
         print(f"Crime: {crime:<30} Total Cases: {total_cases:>5}")
 
-def main(file_path):
-    df = read_csv_file(file_path)
+def main():
+    df = pd.read_csv("juvenile.csv")
     print("Juvenile Crime Data:")
     print(df)
     print("----------------------------------------")
@@ -76,4 +76,4 @@ def main(file_path):
     print("\nF-Strings Usage:")
     f_strings_usage(df)
 
-main("D:\christ\python\LAB\juvenile.csv")
+main()
