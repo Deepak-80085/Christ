@@ -86,6 +86,8 @@ public class PetAdoption {
 
         System.out.println("Thank you for visiting, " + name + "!");
         System.out.println("Remaining pets: Dogs: " + dogs + ", Cats: " + cats + ", Birds: " + birds);
+        scan.close();
     }
+    
 }
  

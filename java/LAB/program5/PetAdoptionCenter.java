@@ -1,9 +1,19 @@
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Animal {
+interface Soundable {
+    void makeSound();
+}
 
+interface Displayable {
+    void displayInfo();
+}
+
+interface Playable {
+    void play();
+}
+
+class Animal implements Soundable, Displayable {
     protected String name;
     protected int age;
     protected String healthStatus;
@@ -14,19 +24,20 @@ class Animal {
         this.healthStatus = healthStatus;
     }
 
+    @Override
     public void displayInfo() {
         System.out.println("Name: " + name);
         System.out.println("Age: " + age);
         System.out.println("Health Status: " + healthStatus);
     }
 
+    @Override
     public void makeSound() {
         System.out.println("Animal makes a sound");
     }
 }
 
-class Dog extends Animal {
-
+class Dog extends Animal implements Playable {
     private final String breed;
 
     public Dog(String name, int age, String healthStatus, String breed) {
@@ -45,13 +56,13 @@ class Dog extends Animal {
         System.out.println(name + " barks: Woof! Woof!");
     }
 
-    public void fetch() {
-        System.out.println(name + " is fetching a ball!");
+    @Override
+    public void play() {
+        System.out.println(name + " is playing fetch!");
     }
 }
 
 class ServiceDog extends Dog {
-
     private final String specialization;
 
     public ServiceDog(String name, int age, String healthStatus, String breed, String specialization) {
@@ -70,8 +81,7 @@ class ServiceDog extends Dog {
     }
 }
 
-class Cat extends Animal {
-
+class Cat extends Animal implements Playable {
     private final boolean isIndoor;
 
     public Cat(String name, int age, String healthStatus, boolean isIndoor) {
@@ -90,15 +100,15 @@ class Cat extends Animal {
         System.out.println(name + " meows: Meow! Meow!");
     }
 
-    public void scratch() {
-        System.out.println(name + " is scratching the scratching post.");
+    @Override
+    public void play() {
+        System.out.println(name + " is playing with a toy mouse!");
     }
 }
 
 public class PetAdoptionCenter {
-
     private static final ArrayList<Animal> animals = new ArrayList<>();
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         System.out.println("Welcome to the Pet Adoption Center!");
@@ -111,8 +121,7 @@ public class PetAdoptionCenter {
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            int choice = getIntInput();
 
             switch (choice) {
                 case 1:
@@ -140,14 +149,12 @@ public class PetAdoptionCenter {
         System.out.println("3. Cat");
         System.out.print("Enter your choice: ");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int choice = getIntInput();
 
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
         System.out.print("Enter age: ");
-        int age = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int age = getIntInput();
         System.out.print("Enter health status: ");
         String healthStatus = scanner.nextLine();
 
@@ -166,7 +173,7 @@ public class PetAdoptionCenter {
                 break;
             case 3:
                 System.out.print("Is it an indoor cat? (true/false): ");
-                boolean isIndoor = scanner.nextBoolean();
+                boolean isIndoor = getBooleanInput();
                 animals.add(new Cat(name, age, healthStatus, isIndoor));
                 break;
             default:
@@ -194,8 +201,7 @@ public class PetAdoptionCenter {
             return;
         }
         System.out.print("Enter the number of the animal you want to interact with: ");
-        int index = scanner.nextInt() - 1;
-        scanner.nextLine(); // Consume newline
+        int index = getIntInput() - 1;
 
         if (index < 0 || index >= animals.size()) {
             System.out.println("Invalid animal number.");
@@ -206,14 +212,30 @@ public class PetAdoptionCenter {
         System.out.println("\nInteracting with " + animal.name + ":");
         animal.makeSound();
 
-        if (animal instanceof Dog dog) {
-            dog.fetch();
+        if (animal instanceof Playable playable) {
+            playable.play();
         }
         if (animal instanceof ServiceDog serviceDog) {
             serviceDog.performDuty();
         }
-        if (animal instanceof Cat cat) {
-            cat.scratch();
+    }
+
+    private static int getIntInput() {
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid input. Please enter a number: ");
+            }
+        }
+    }
+
+    private static boolean getBooleanInput() {
+        while (true) {
+            String input = scanner.nextLine().toLowerCase();
+            if (input.equals("true")) return true;
+            if (input.equals("false")) return false;
+            System.out.print("Invalid input. Please enter 'true' or 'false': ");
         }
     }
 }

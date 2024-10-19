@@ -188,4 +188,3 @@ public class pet_adoption {
         scan.close();
     }
 }
-    
