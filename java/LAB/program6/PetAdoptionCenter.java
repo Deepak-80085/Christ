@@ -72,6 +72,7 @@ class Pet implements Animal, Adoptable, Carable {
     }
 
     // Carable interface methods
+    
     @Override
     public void feed() {
         System.out.println(name + " has been fed.");

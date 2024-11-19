@@ -16,7 +16,7 @@ public class MainProgram {
         System.out.print("Enter your dog's breed: ");
         String dogBreed = scanner.nextLine();
         
-        Dog dog = new Dog(dogName, dogBreed);
+        P1.Dog dog = new P1.Dog(dogName, 0, dogBreed, dogBreed);
 
         // Welcome customer and provide options
         CustomerService customerService = new CustomerService();
