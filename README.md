@@ -1,7 +1,7 @@
 # CHRIST
 
 ## Description
-## This repository contains code of my college 
+## This repository contains lecture and lab codes of my academics
 
 # Contents:
 
