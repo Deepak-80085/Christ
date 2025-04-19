@@ -1,0 +1,113 @@
+mysql> create
+    -> ^C
+mysql> create table matches(
+    -> match_id int auto_increment primary key,
+    -> tournament_name varchar(100),
+    -> team varchar(100),
+    -> score int,
+    -> match_date date
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into matches(tournment_name,team,score,match_date) values
+    -> ('Champions Cup', 'Team A', 3, '2025-03-10'),
+    -> ('Champions Cup', 'Team B', 1, '2025-03-10'),
+    -> ('Champions Cup', 'Team C', 4, '2025-03-11'),
+    -> ('Champions Cup', 'Team D', 2, '2025-03-11'),
+    -> ('Premier League', 'Team X', 5, '2025-03-12'),
+    -> ('Premier League', 'Team Y', 2, '2025-03-12'),
+    -> ('Premier League', 'Team Z', 3, '2025-03-13');
+ERROR 1054 (42S22): Unknown column 'tournment_name' in 'field list'
+mysql> insert into matches(tournament_name,team,score,match_date) values
+    -> ('Champions Cup', 'Team A', 3, '2025-03-10'),
+    -> ('Champions Cup', 'Team B', 1, '2025-03-10'),
+    -> ('Champions Cup', 'Team D', 2, '2025-03-11'),
+    -> ('Premier League', 'Team Z', 3, '2025-03-13');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select tournament_name,count(*) as total_matches
+    -> from matches
+    -> group by tournament_name;
++-----------------+---------------+
+| tournament_name | total_matches |
++-----------------+---------------+
+| Champions Cup   |             3 |
+| Premier League  |             1 |
++-----------------+---------------+
+2 rows in set (0.01 sec)
+
+mysql> select tournament_name,sum(score) as total_score
+    -> from matches
+    -> group by tournament_name;
++-----------------+-------------+
+| tournament_name | total_score |
++-----------------+-------------+
+| Champions Cup   |           6 |
+| Premier League  |           3 |
++-----------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select tournament_name,avg(score) as avg_score
+    -> from matches
+    -> group by tournament_name;
++-----------------+-----------+
+| tournament_name | avg_score |
++-----------------+-----------+
+| Champions Cup   |    2.0000 |
+| Premier League  |    3.0000 |
++-----------------+-----------+
+2 rows in set (0.01 sec)
+
+mysql> select tournament_name,max(score) as max_score
+    -> from matches
+    -> group by tournament_name;
++-----------------+-----------+
+| tournament_name | max_score |
++-----------------+-----------+
+| Champions Cup   |         3 |
+| Premier League  |         3 |
++-----------------+-----------+
+2 rows in set (0.01 sec)
+
+mysql> select tournament_name,min(score) as min_score
+    -> from matches
+    -> group by tournament_name;
++-----------------+-----------+
+| tournament_name | min_score |
++-----------------+-----------+
+| Champions Cup   |         1 |
+| Premier League  |         3 |
++-----------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select tournament_name,sum(score) as total_score
+    -> from matches
+    -> group by tournament_name
+    -> having sum(score) >8;
+Empty set (0.01 sec)
+
+mysql> select tournament_name,count(*) as total_matches
+    -> from matches
+    -> group by tournament_name
+    -> having count(*)<3;
++-----------------+---------------+
+| tournament_name | total_matches |
++-----------------+---------------+
+| Premier League  |             1 |
++-----------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select tournament_name,avg(score) as avg_score
+    -> from matches
+    -> group by tournament_name
+    -> having avg(score) between 2 and 4;
++-----------------+-----------+
+| tournament_name | avg_score |
++-----------------+-----------+
+| Champions Cup   |    2.0000 |
+| Premier League  |    3.0000 |
++-----------------+-----------+
+2 rows in set (0.01 sec)
+
+mysql> notee;

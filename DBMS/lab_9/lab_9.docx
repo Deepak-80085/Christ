@@ -1,0 +1,179 @@
+mysql> create table players(
+    -> player_id int primary key auto_increment,
+    -> player_name varchar(100),
+    -> age int,
+    -> team_id int,
+    -> foreign key (team_id) references teams(team_id)
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> use lab_9;
+Database changed
+mysql> create table players(
+    -> player_id int primary key auto_increment,
+    -> player_name varchar(100),
+    -> age int,
+    -> team_id int,
+    -> foreign key (team_id) references teams(team_id)
+    -> );
+ERROR 1824 (HY000): Failed to open the referenced table 'teams'
+mysql> create table players(
+    ->     -> player_id int primary key auto_increment,
+    ->     -> player_name varchar(100),
+    ->     -> age int,
+    ->     -> team_id int
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> player_id int primary key auto_increment,
+    -> player_name varchar(100),
+  ' at line 2
+mysql> CREATE TABLE Players (
+    ->     player_id INT PRIMARY KEY AUTO_INCREMENT,
+    ->     player_name VARCHAR(100),
+    ->     age INT,
+    ->     team_id INT
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table teams(
+    -> team_id int primary key auto_increment,
+    -> team_name varchar(100),
+    -> coach_name varchar(1000
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+mysql> create table teams(
+    -> team_id int primary key auto_increment,
+    -> team_name varchar(100),
+    -> coach_name varchar(100)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE Matches (
+    ->     match_id INT PRIMARY KEY AUTO_INCREMENT,
+    ->     team1_id INT,
+    ->     team2_id INT,
+    ->     match_date DATE,
+    ->     winner_id INT,
+    ->     FOREIGN KEY (team1_id) REFERENCES Teams(team_id),
+    ->     FOREIGN KEY (team2_id) REFERENCES Teams(team_id),
+    ->     FOREIGN KEY (winner_id) REFERENCES Teams(team_id)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> alter table players foreign key (team_id) references teams(team_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key (team_id) references teams(team_id)' at line 1
+mysql> alter table players foreign key(team_id) references teams(team_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key(team_id) references teams(team_id)' at line 1
+mysql> alter table players 
+    -> add constraint fk_team
+    -> foreign key(team_id) refereneces teams(team_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'refereneces teams(team_id)' at line 3
+mysql> alter table players 
+    -> add constraint fk_team
+    -> foreign key(team_id) references teams(team_id);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select player_id,player_name,age,team_name
+    -> from players natural join teams;
+Empty set (0.01 sec)
+
+mysql> INSERT INTO Teams (team_name, coach_name) VALUES
+    -> ('Warriors', 'Coach A'),
+    -> ('Strikers', 'Coach B'),
+    -> ('Titans', 'Coach C'),
+    -> ('Blazers', 'Coach D');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Players (player_name, age, team_id) VALUES
+    -> ('oi', 22, 1),
+    -> ('yo',24,2),
+    -> ('David', 23, 1),
+    -> ('Eve', 24, NULL);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Matches (team1_id, team2_id, match_date, winner_id) VALUES
+    -> (1, 2, '2025-03-10', 1),
+    -> (1,1 , '2025-03-11', 4),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> INSERT INTO Matches (team1_id, team2_id, match_date, winner_id) VALUES
+    -> (1,1 , '2025-03-11', 4),
+    -> (1, 2, '2025-03-10', 1);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT player_id, player_name, age, team_name 
+    -> FROM Players NATURAL JOIN Teams;
++-----------+-------------+------+-----------+
+| player_id | player_name | age  | team_name |
++-----------+-------------+------+-----------+
+|         1 | oi          |   22 | Warriors  |
+|         2 | yo          |   24 | Strikers  |
+|         3 | David       |   23 | Warriors  |
++-----------+-------------+------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select players.player_id,players.player_name,teams.team_name
+    -> from players
+    -> inner join teams on players.team_id = teams.team_id;
++-----------+-------------+-----------+
+| player_id | player_name | team_name |
++-----------+-------------+-----------+
+|         1 | oi          | Warriors  |
+|         2 | yo          | Strikers  |
+|         3 | David       | Warriors  |
++-----------+-------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select players.player_id,players.player_name,teams.team_name
+    -> from players
+    -> outer join teams on players.team_id = teams.team_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'outer join teams on players.team_id = teams.team_id' at line 3
+mysql> select players.player_id,players.player_name,teams.team_name
+    -> from players
+    -> left outer join teams on players.team_id = teams.team_id;
++-----------+-------------+-----------+
+| player_id | player_name | team_name |
++-----------+-------------+-----------+
+|         1 | oi          | Warriors  |
+|         2 | yo          | Strikers  |
+|         3 | David       | Warriors  |
+|         4 | Eve         | NULL      |
++-----------+-------------+-----------+
+4 rows in set (0.01 sec)
+
+mysql> select players.player_id,players.player_name,teams.team_name
+    -> from players
+    -> right outer join teams on players.team_id = teams.team_id;
++-----------+-------------+-----------+
+| player_id | player_name | team_name |
++-----------+-------------+-----------+
+|         1 | oi          | Warriors  |
+|         3 | David       | Warriors  |
+|         2 | yo          | Strikers  |
+|      NULL | NULL        | Titans    |
+|      NULL | NULL        | Blazers   |
++-----------+-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select players.player_id,players.player_name,teams.team_name
+    -> from players
+    -> left outer join teams on players.team_id = teams.team_id
+    -> union
+    -> select players.player_id,players.player_name,teams.team_name
+    -> from players
+    -> right outer join teams on players.team_id = teams.team_id;
++-----------+-------------+-----------+
+| player_id | player_name | team_name |
++-----------+-------------+-----------+
+|         1 | oi          | Warriors  |
+|         2 | yo          | Strikers  |
+|         3 | David       | Warriors  |
+|         4 | Eve         | NULL      |
+|      NULL | NULL        | Titans    |
+|      NULL | NULL        | Blazers   |
++-----------+-------------+-----------+
+6 rows in set (0.01 sec)
+
+mysql> notee;

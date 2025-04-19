@@ -1,0 +1,147 @@
+mysql> SELECT * FROM participants WHERE Age = 25;
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+| ParticipantID | ParticipantName | Email                | Age  | TeamName   | TournamentID | PhoneNumber |
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+|             2 | John Doe        | john.doe@example.com |   25 | Team Alpha |            1 | NULL        |
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT * FROM tournaments WHERE StartDate > '2024-03-01';
+Empty set (0.01 sec)
+
+mysql> SELECT * FROM teams WHERE TeamID <= 101;
++--------+----------+-----------+
+| TeamID | TeamName | CoachName |
++--------+----------+-----------+
+|    101 | oi       | obu       |
++--------+----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM participants WHERE TeamName <> 'Team Alpha';
++---------------+-----------------+-------------------+------+----------+--------------+-------------+
+| ParticipantID | ParticipantName | Email             | Age  | TeamName | TournamentID | PhoneNumber |
++---------------+-----------------+-------------------+------+----------+--------------+-------------+
+|             1 | yachiru unohana | unohana@yahoo.com |   22 | Team Ace |            1 | NULL        |
++---------------+-----------------+-------------------+------+----------+--------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM participants WHERE PhoneNumber IS NULL;
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+| ParticipantID | ParticipantName | Email                | Age  | TeamName   | TournamentID | PhoneNumber |
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+|             1 | yachiru unohana | unohana@yahoo.com    |   22 | Team Ace   |            1 | NULL        |
+|             2 | John Doe        | john.doe@example.com |   25 | Team Alpha |            1 | NULL        |
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM participants WHERE Email IS NOT NULL;
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+| ParticipantID | ParticipantName | Email                | Age  | TeamName   | TournamentID | PhoneNumber |
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+|             2 | John Doe        | john.doe@example.com |   25 | Team Alpha |            1 | NULL        |
+|             1 | yachiru unohana | unohana@yahoo.com    |   22 | Team Ace   |            1 | NULL        |
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT TeamName, COUNT(*) AS ParticipantCount
+    -> FROM participants
+    -> GROUP BY TeamName;
++------------+------------------+
+| TeamName   | ParticipantCount |
++------------+------------------+
+| Team Ace   |                1 |
+| Team Alpha |                1 |
++------------+------------------+
+2 rows in set (0.01 sec)
+
+mysql> SELECT MIN(StartDate) AS EarliestStartDate FROM tournaments;
++-------------------+
+| EarliestStartDate |
++-------------------+
+| 2024-03-01        |
++-------------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT * FROM participants WHERE TeamName IN ('Team Ace', 'Team Alpha');
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+| ParticipantID | ParticipantName | Email                | Age  | TeamName   | TournamentID | PhoneNumber |
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+|             1 | yachiru unohana | unohana@yahoo.com    |   22 | Team Ace   |            1 | NULL        |
+|             2 | John Doe        | john.doe@example.com |   25 | Team Alpha |            1 | NULL        |
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM tournaments
+    -> WHERE StartDate BETWEEN '2024-03-01' AND '2024-03-31';
++--------------+------------------+----------+------------+------------+-----------+
+| TournamentID | TournamentName   | MaxTeams | StartDate  | EndDate    | Location  |
++--------------+------------------+----------+------------+------------+-----------+
+|            1 | Cricket Cup 2024 |       16 | 2024-03-01 | 2024-03-15 | Bangalore |
++--------------+------------------+----------+------------+------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM participants WHERE ParticipantName LIKE '%John%';
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+| ParticipantID | ParticipantName | Email                | Age  | TeamName   | TournamentID | PhoneNumber |
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+|             2 | John Doe        | john.doe@example.com |   25 | Team Alpha |            1 | NULL        |
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM teams WHERE TeamName LIKE 'oi%';
++--------+----------+-----------+
+| TeamID | TeamName | CoachName |
++--------+----------+-----------+
+|    101 | oi       | obu       |
+|    102 | oioi     | obu obu   |
++--------+----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT p.ParticipantName AS Name, t.TournamentName AS Tournament
+    -> FROM participants p
+    -> JOIN tournaments t ON p.TournamentID = t.TournamentID;
++-----------------+------------------+
+| Name            | Tournament       |
++-----------------+------------------+
+| yachiru unohana | Cricket Cup 2024 |
+| John Doe        | Cricket Cup 2024 |
++-----------------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM participants WHERE Age > 20 AND TeamName = 'Team Ace';
++---------------+-----------------+-------------------+------+----------+--------------+-------------+
+| ParticipantID | ParticipantName | Email             | Age  | TeamName | TournamentID | PhoneNumber |
++---------------+-----------------+-------------------+------+----------+--------------+-------------+
+|             1 | yachiru unohana | unohana@yahoo.com |   22 | Team Ace |            1 | NULL        |
++---------------+-----------------+-------------------+------+----------+--------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM tournaments
+    -> WHERE MONTH(StartDate) = 1 OR MONTH(StartDate) = 3;
++--------------+------------------+----------+------------+------------+-----------+
+| TournamentID | TournamentName   | MaxTeams | StartDate  | EndDate    | Location  |
++--------------+------------------+----------+------------+------------+-----------+
+|            1 | Cricket Cup 2024 |       16 | 2024-03-01 | 2024-03-15 | Bangalore |
++--------------+------------------+----------+------------+------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM participants WHERE NOT TeamName = 'Team Ace';
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+| ParticipantID | ParticipantName | Email                | Age  | TeamName   | TournamentID | PhoneNumber |
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+|             2 | John Doe        | john.doe@example.com |   25 | Team Alpha |            1 | NULL        |
++---------------+-----------------+----------------------+------+------------+--------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM participants
+    -> WHERE Age BETWEEN 20 AND 30
+    ->   AND TeamName != 'Team Alpha'
+    ->   AND Email IS NOT NULL;
++---------------+-----------------+-------------------+------+----------+--------------+-------------+
+| ParticipantID | ParticipantName | Email             | Age  | TeamName | TournamentID | PhoneNumber |
++---------------+-----------------+-------------------+------+----------+--------------+-------------+
+|             1 | yachiru unohana | unohana@yahoo.com |   22 | Team Ace |            1 | NULL        |
++---------------+-----------------+-------------------+------+----------+--------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> notee;

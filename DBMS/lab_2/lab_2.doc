@@ -1,0 +1,133 @@
+mysql> CREATE DATABASE 4BScCM_<Your_Registration_Number>;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '<Your_Registration_Number>' at line 1
+mysql> USE 4BScCM_<Your_Registration_Number>;
+ERROR 1049 (42000): Unknown database '4bsccm_<your_registration_number>'
+mysql> CREATE DATABASE 4BscCM_2340177;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| 4bsccm_2340177     |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| 4bsccm_2340177     |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> CREATE TABLE Tournaments (
+    ->     TournamentID INT AUTO_INCREMENT PRIMARY KEY,
+    ->     TournamentName VARCHAR(100) NOT NULL,
+    ->     StartDate DATE NOT NULL,
+    ->     EndDate DATE NOT NULL,
+    ->     Location VARCHAR(100)
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> USE 4bsccm_2340177
+Database changed
+mysql> CREATE TABLE Tournaments (
+    ->     TournamentID INT AUTO_INCREMENT PRIMARY KEY,
+    ->     TournamentName VARCHAR(100) NOT NULL,
+    ->     StartDate DATE NOT NULL,
+    ->     EndDate DATE NOT NULL,
+    ->     Location VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Participants (
+    ->     ParticipantID INT AUTO_INCREMENT PRIMARY KEY,
+    ->     Name VARCHAR(100) NOT NULL,
+    ->     Age INT NOT NULL,
+    ->     TournamentID INT,
+    ->     FOREIGN KEY (TournamentID) REFERENCES Tournaments(TournamentID)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> ALTER TABLE Participants ADD COLUMN TeamName VARCHAR(100);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> RENAME TABLE Tournaments TO SportsEvents;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 	DROP TABLE Participants;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO SportsEvents (TournamentID, TournamentName, StartDate, EndDate, Location) VALUES(1,Cricket Cup', '2024-02-01', '2024-02-15','BANGALORE');
+    '> 
+    '> ;
+    '> ^C
+mysql> INSERT INTO SportsEvents (TournamentID, TournamentName, StartDate, EndDate, Location)
+    -> VALUES (1, 'Football League', '2024-01-11', '2024-01-11', 'BANGALORE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Participants (Name, Age, TournamentID, TeamName)
+    -> VALUES ('PUSHPA', 25, 999, 'Team Alpha');
+ERROR 1146 (42S02): Table '4bsccm_2340177.participants' doesn't exist
+mysql> SELECT * FROM SportsEvents WHERE Location = 'BANGALORE';
++--------------+-----------------+------------+------------+-----------+
+| TournamentID | TournamentName  | StartDate  | EndDate    | Location  |
++--------------+-----------------+------------+------------+-----------+
+|            1 | Football League | 2024-01-11 | 2024-01-11 | BANGALORE |
++--------------+-----------------+------------+------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT p.Name, p.TeamName, e.TournamentName, e.Location
+    -> FROM Participants p
+    -> INNER JOIN SportsEvents e ON p.TournamentID = e.TournamentID;
+ERROR 1146 (42S02): Table '4bsccm_2340177.participants' doesn't exist
+mysql> SELECT p.Name, p.TeamName, e.TournamentName, e.Location
+    -> FROM Participants p
+    -> INNER JOIN SportsEvents e ON p.TournamentID = e.TournamentID;
+ERROR 1146 (42S02): Table '4bsccm_2340177.participants' doesn't exist
+mysql> 	show tables;
++--------------------------+
+| Tables_in_4bsccm_2340177 |
++--------------------------+
+| sportsevents             |
++--------------------------+
+1 row in set (0.01 sec)
+
+mysql> CREATE TABLE Participants (
+    ->     ParticipantID INT AUTO_INCREMENT PRIMARY KEY,
+    ->     Name VARCHAR(100) NOT NULL,
+    ->     Age INT NOT NULL,
+    ->     TournamentID INT,
+    ->     TeamName VARCHAR(100),
+    ->     FOREIGN KEY (TournamentID) REFERENCES SportsEvents(TournamentID)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> SELECT p.Name, p.TeamName, e.TournamentName, e.Location
+    -> FROM Participants p
+    -> INNER JOIN SportsEvents e ON p.TournamentID = e.TournamentID;
+Empty set (0.00 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_4bsccm_2340177 |
++--------------------------+
+| participants             |
+| sportsevents             |
++--------------------------+
+2 rows in set (0.00 sec)
+
+mysql> notee;

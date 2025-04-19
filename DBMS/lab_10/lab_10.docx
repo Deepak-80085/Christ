@@ -1,0 +1,116 @@
+mysql> desc players;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| player_id   | int          | NO   | PRI | NULL    | auto_increment |
+| player_name | varchar(100) | YES  |     | NULL    |                |
+| age         | int          | YES  |     | NULL    |                |
+| team_id     | int          | YES  | MUL | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.02 sec)
+
+mysql> desc teams;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| team_id    | int          | NO   | PRI | NULL    | auto_increment |
+| team_name  | varchar(100) | YES  |     | NULL    |                |
+| coach_name | varchar(100) | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> desc matchs;
+ERROR 1146 (42S02): Table 'lab_9.matchs' doesn't exist
+mysql> desc matches;
++------------+------+------+-----+---------+----------------+
+| Field      | Type | Null | Key | Default | Extra          |
++------------+------+------+-----+---------+----------------+
+| match_id   | int  | NO   | PRI | NULL    | auto_increment |
+| team1_id   | int  | YES  | MUL | NULL    |                |
+| team2_id   | int  | YES  | MUL | NULL    |                |
+| match_date | date | YES  |     | NULL    |                |
+| winner_id  | int  | YES  | MUL | NULL    |                |
++------------+------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select player_nmae ,age,team_id
+    -> from players
+    -> where team_id = (select team_id from players group by team_id order by count(*) desc limit 1);
+ERROR 1054 (42S22): Unknown column 'player_nmae' in 'field list'
+mysql> where team_id = (select team_id from players group by team_id order by count(*) desc limit 1);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where team_id = (select team_id from players group by team_id order by count(*) ' at line 1
+mysql> select player_name ,age,team_id
+    -> from players
+    -> where team_id = (select team_id from players group by team_id order by count(*) desc limit 1);
++-------------+------+---------+
+| player_name | age  | team_id |
++-------------+------+---------+
+| oi          |   22 |       1 |
+| David       |   23 |       1 |
++-------------+------+---------+
+2 rows in set (0.01 sec)
+
+mysql> select player_name,age
+    -> from players
+    -> where age>(select avg(age) from players)'
+    '> ;
+    '> ;
+    '> ^C
+mysql> select player_name,age
+    -> where age>(select avg(age) from players)'
+    '> ^C
+mysql> select player_name,age
+    -> from players
+    -> where age>(select avg(age) from players);
++-------------+------+
+| player_name | age  |
++-------------+------+
+| yo          |   24 |
+| Eve         |   24 |
++-------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select team_name from teams
+    -> where team_id in (select distinct team_id from matches union select distinct team2_id from matches);
++-----------+
+| team_name |
++-----------+
+| Warriors  |
+| Strikers  |
+| Titans    |
+| Blazers   |
++-----------+
+4 rows in set (0.00 sec)
+
+mysql> select player_name,age,team_name
+    -> from players,teams
+    -> where(player.team_id,player.age) in (select team_id,max(age) from players group by team_id);
+ERROR 1054 (42S22): Unknown column 'player.team_id' in 'IN/ALL/ANY subquery'
+mysql> select player_name,age,team_name
+    -> from players,teams
+    -> where(players.team_id,players.age) in (select team_id,max(age) from players group by team_id);
++-------------+------+-----------+
+| player_name | age  | team_name |
++-------------+------+-----------+
+| David       |   23 | Warriors  |
+| yo          |   24 | Warriors  |
+| David       |   23 | Strikers  |
+| yo          |   24 | Strikers  |
+| David       |   23 | Titans    |
+| yo          |   24 | Titans    |
+| David       |   23 | Blazers   |
+| yo          |   24 | Blazers   |
++-------------+------+-----------+
+8 rows in set (0.01 sec)
+
+mysql> select team_name,coach_name
+    -> from teams
+    -> where (team_id,team_name) in (select winner_id,team_name from matches join teams on matches.winner_id = teams.team_id where matches.match_date > '2025-03-10');
++-----------+------------+
+| team_name | coach_name |
++-----------+------------+
+| Blazers   | Coach D    |
++-----------+------------+
+1 row in set (0.01 sec)
+
+mysql> notee;

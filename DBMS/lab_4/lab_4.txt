@@ -1,0 +1,153 @@
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| 4bsccm_2340146     |
+| 4bsccm_2340177     |
+| 4bsccm_2340179     |
+| information_schema |
+| mysql              |
+| performance_schema |
+| raghini            |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> use 4bsccm_2340177;
+Database changed
+mysql> CREATE TABLE Teams (
+    ->     TeamID INT PRIMARY KEY,
+    ->     TeamName VARCHAR(100) NOT NULL,
+    ->     CoachName VARCHAR(100)
+    -> );
+ERROR 1050 (42S01): Table 'teams' already exists
+mysql> drop table teams;
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_4bsccm_2340177 |
++--------------------------+
+| courses                  |
+| participants             |
+| sportsevents             |
+| students                 |
+| tournaments              |
++--------------------------+
+5 rows in set (0.01 sec)
+
+mysql> CREATE TABLE Teams (
+    ->     TeamID INT PRIMARY KEY,
+    ->     TeamName VARCHAR(100) NOT NULL,
+    ->     CoachName VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Players (
+    ->     PlayerID INT PRIMARY KEY,
+    ->     Name VARCHAR(100) NOT NULL,
+    ->     Age INT NOT NULL,
+    ->     TeamID INT,
+    ->     FOREIGN KEY (TeamID) REFERENCES Teams(TeamID)
+    ->         ON DELETE SET NULL
+    ->         ON UPDATE CASCADE
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> INSERT INTO Teams (TeamID, TeamName, CoachName)
+    -> VALUES 
+    -> (101, 'oi', 'obu'),
+    -> (102,'oioi','obu obu');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Players (PlayerID, Name, Age, TeamID)
+    -> VALUES 
+    -> (1, 'Alice Johnson', 25, 101),
+    -> (2, 'Bob Smith', 22, 102),
+    -> (3, 'Charlie Brown', 28, 101);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Players;
++----------+---------------+-----+--------+
+| PlayerID | Name          | Age | TeamID |
++----------+---------------+-----+--------+
+|        1 | Alice Johnson |  25 |    101 |
+|        2 | Bob Smith     |  22 |    102 |
+|        3 | Charlie Brown |  28 |    101 |
++----------+---------------+-----+--------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT PlayerID, Name FROM Players;
++----------+---------------+
+| PlayerID | Name          |
++----------+---------------+
+|        1 | Alice Johnson |
+|        2 | Bob Smith     |
+|        3 | Charlie Brown |
++----------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT TeamID FROM Players;
++--------+
+| TeamID |
++--------+
+|    101 |
+|    102 |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(DISTINCT TeamID) AS UniqueTeams FROM Players;
++-------------+
+| UniqueTeams |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT 
+    ->     MIN(Age) AS YoungestPlayer,
+    ->     MAX(Age) AS OldestPlayer,
+    ->     COUNT(*) AS TotalPlayers,
+    ->     AVG(Age) AS AverageAge
+    -> FROM Players;
++----------------+--------------+--------------+------------+
+| YoungestPlayer | OldestPlayer | TotalPlayers | AverageAge |
++----------------+--------------+--------------+------------+
+|             22 |           28 |            3 |    25.0000 |
++----------------+--------------+--------------+------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT * FROM Players LIMIT 2;
++----------+---------------+-----+--------+
+| PlayerID | Name          | Age | TeamID |
++----------+---------------+-----+--------+
+|        1 | Alice Johnson |  25 |    101 |
+|        2 | Bob Smith     |  22 |    102 |
++----------+---------------+-----+--------+
+2 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> UPDATE Players
+    -> SET Age = 26
+    -> WHERE PlayerID = 1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Players
+    -> SET TeamID = 102;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 3  Changed: 2  Warnings: 0
+
+mysql> DELETE FROM Players
+    -> WHERE PlayerID = 3;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> DELETE FROM Players;
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> notee;
