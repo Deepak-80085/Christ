@@ -1,9 +1,9 @@
-##CHRIST
+# CHRIST
 
-#Description
-#This repository contains code of my college 
+## Description
+## This repository contains code of my college 
 
-**Contents:**
+# Contents:
 
 * C Programming with Operating Systems
 * Array Data Structures in C
